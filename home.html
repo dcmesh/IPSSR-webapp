@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+  <script src="shared/jquery.js" type="text/javascript"></script>
+  <script src="shared/shiny.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="shared/shiny.css"/>
+
+
+<!--Use this to pick color https://htmlcolorcodes.com/ -->
+
+<style>
+.myborder{
+ border-style:solid;
+ border-color:#287EC7;
+ margin: 50px;
+ width: 500px;
+}
+{
+  box-sizing: border-box;
+}
+.column {
+  float: left;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.left {
+  width: 45%;
+}
+
+.right {
+  width: 15%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+  <style>
+.button {
+  background-color: #5BB5F0;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: blue;
+}
+</style>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
+
+</head>
+
+<h1><font color="blue">Revised International Prognostic Scoring System (IPSS-R) for Myelodysplastic Syndromes Risk Assessment Calculator</font></h1>
+  <p>Developed by the International Working Group for the Prognosis of MDS (IWG-PM) under the aegis of the MDS Foundation, Inc.
+
+When entering values into the calculator, note the units given in parentheses. Also note that the usual ranges, given for orientation, are in brackets. These are not normal ranges.</p>
+
+<center>
+<div class="myborder">
+<div class="row">
+    <form action="" method="post">
+    <fieldset>
+        <b><p align="justify">Variables (unit) [usual range]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Value </p></b>
+
+        <div class="form-group">
+            <label ><p align="left">Hemoglobin (g/dL) [4-20]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input name="hemoglobin" type="text" class="form-control"/></p>
+        </div>
+
+        <div class="form-group">
+            <label ><p align="left">Absolute Neutrophil Count (x109/L)[0-15]&nbsp;&nbsp;&nbsp;</label>
+            <input name="anc" type="text" class="form-control"/></p>
+        </div>
+        <div class="form-group">
+            <label><p align="left">Platelets (x109/L) [0-2000]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input name="platelets" type="text" class="form-control"/></p>
+        </div>
+        <div class="form-group">
+            <label><p align="left">Bone Marrow Blasts (percent) [0-30]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input name="marrow" type="text" class="form-control"/></p>
+        </div>
+        <div class="form-group">
+            <label><p align="left">Cytogenetic Category</label></p>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="cyto">
+                  Very Good
+                </label>
+                <label class="radio">
+                  <input type="radio" name="cyto">
+                  Good
+                </label>
+                <label class="radio">
+                  <input type="radio" name="cyto">
+                  Intermediate
+                </label>
+                <label class="radio">
+                  <input type="radio" name="cyto">
+                  Poor
+                </label>
+                <label class="radio">
+                  <input type="radio" name="cyto">
+                  Very Poor
+                </label>
+              </div>
+        </div>
+    </fieldset>
+        <p></p>
+    <input name="submit" type="submit" value="Calculate" class="button"/><hr/>
+    </form>
+    <br>
+</div>
+            <table class="table table-striped">
+                <thread>
+                    <tr>
+                        <th scope="col">IPSS-R Score</th>
+                        <th scope="col">IPSS-R Category</th>
+                    </tr>
+                </thread>
+                <tbody>
+                <tr>
+                    <td>{{ elements.score }}</td>
+                    <td>{{ elements.category }}</td>
+                </tr>
+                </tbody>
+            </table>
+    <br>
+</div>
+
+    <h3><font color="red">IPSS-R Cytogenetic risk groups*,**</font></h3>
+<table style="width:60%">
+  <tr>
+    <th>Cytogenetic prognostic subgroups</th>
+    <th>Cytogenetic abnormalities</th>
+  </tr>
+  <tr>
+    <td>Very Good</td>
+    <td>-Y, del(11q)</td>
+  </tr>
+  <tr>
+    <td>Good</td>
+    <td>Normal, del(5q), del(12p), del(20q), double including del(5q)</td>
+  </tr>
+  <tr>
+    <td>Intermediate</td>
+    <td>del(7q), +8, +19, i(17q), any other single or double independent clones</td>
+  </tr>
+  <tr>
+    <td>Poor</td>
+    <td>-7, inv(3)/t(3q)/del(3q), double including -7/del(7q), Complex: 3 abnormalities</td>
+  </tr>
+  <tr>
+    <td>Very Poor</td>
+    <td>Complex: >3 abnormalities</td>
+  </tr>
+</table>
+    <br>
+    <h3><font color="red">IPSS-R Prognostic Score Values*</font></h3>
+<table style="width:60%">
+  <tr>
+    <th>Prognostic Variable</th>
+    <td>0</td>
+    <td>1</td>
+    <td>1.5</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <th>Cytogenetics</th>
+    <td>Very Good</td>
+    <td></td>
+    <td>Good</td>
+    <td>  </td>
+    <td>Intermediate</td>
+    <td>Poor</td>
+    <td>Very Poor</td>
+  </tr>
+  <tr>
+    <th>BM Blast %</th>
+    <td><=2</td>
+    <td> </td>
+    <td>>2-<5%</td>
+    <td> </td>
+    <td>5-10%</td>
+    <td><10%</td>
+    <td> </td>
+  </tr>
+  <tr>
+    <th>Hemoglobin</th>
+    <td>=>10</td>
+    <td> </td>
+    <td>8-<10</td>
+    <td><8</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+      <th>Platelets</th>
+    <td>=>100</td>
+    <td>50-<100	</td>
+    <td><50</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <th>ANC</th>
+    <td>=>0.8</td>
+    <td><0.8</td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+  </tr>
+</table>
+    <br>
+    <h3><font color="red">IPSS-R Prognostic Risk Categories/Scores*</font></h3>
+<table style="width:60%">
+  <tr>
+    <th>RISK CATEGORY</th>
+    <th>RISK SCORE</th>
+  </tr>
+  <tr>
+    <td>Very Low</td>
+    <td><=1.5</td>
+  </tr>
+  <tr>
+    <td>Low</td>
+    <td>>1.5 - 3</td>
+  </tr>
+  <tr>
+    <td>Intermediate</td>
+    <td>>3 - 4.5</td>
+  </tr>
+  <tr>
+    <td>High</td>
+    <td>>4.5 - 6</td>
+  </tr>
+  <tr>
+    <td>Very High</td>
+    <td>>6</td>
+  </tr>
+</table>
+    <br>
+    <h3><font color="red">IPSS-R: Prognostic Risk Category Clinical Outcomes*</font></h3>
+<table style="width:60%">
+  <tr>
+    <th></th>
+    <th>No.pts</th>
+    <th>Very Low</th>
+    <th>Low</th>
+    <th>Intermediate</th>
+    <th>High</th>
+    <th>Very High</th>
+  </tr>
+  <tr>
+    <th>Patients (%)</th>
+    <td>7012</td>
+    <td>19%</td>
+    <td>38%</td>
+    <td>20%</td>
+    <td>13%</td>
+    <td>10%</td>
+  </tr>
+  <tr>
+    <th>Survival***</th>
+    <td></td>
+    <td>8.8</td>
+    <td>5.3</td>
+    <td>3.0</td>
+    <td>1.6</td>
+    <td>0.8</td>
+  </tr>
+  <tr>
+    <th>AML/25%</th>
+    <td></td>
+    <td>NR</td>
+    <td>10.8</td>
+    <td>3.2</td>
+    <td>1.4</td>
+    <td>0.7</td>
+  </tr>
+</table>
+    <br><br>
+    <p>***Medians, years ^Median time to 25% AML evolution</p>
+    <p>*Greenberg, Tuechler, Schanz et al, Revised International Prognostic Scoring System (IPSS-R) for Myelodysplastic Syndrome, Blood 120: 2454, 2012.</p>
+    <p>**Schanz J et al, J Clin Oncology 2012; 30:820</p>
+</center>
+</html>
+
+
+
